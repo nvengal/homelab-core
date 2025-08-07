@@ -1,0 +1,33 @@
+services:
+  caddy:
+    image: caddy:2
+    container_name: caddy
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 80:80
+      - 443:443
+      - 443:443/udp
+    volumes:
+      - /tank/services/caddy/caddy:/etc/caddy
+      - /tank/services/caddy/data:/data
+      - /tank/services/caddy/config:/config
+
+  gitea:
+    image: docker.gitea.com/gitea:1.24.4
+    container_name: gitea
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+    restart: unless-stopped
+    volumes:
+      - /tank/services/gitea:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 222:22
+
+networks:
+  default:
+    name: homelab-core
