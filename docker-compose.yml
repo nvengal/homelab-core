@@ -10,7 +10,7 @@ services:
       - 443:443
       - 443:443/udp
     volumes:
-      - /tank/services/caddy/caddy:/etc/caddy
+      - /tank/git/homelab-config/caddy:/etc/caddy
       - /tank/services/caddy/data:/data
       - /tank/services/caddy/config:/config
 
