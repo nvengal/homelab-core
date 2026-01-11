@@ -1,6 +1,6 @@
 services:
   caddy:
-    image: caddy:2
+    image: homelab-core/caddy:latest # built in portainer
     container_name: caddy
     restart: unless-stopped
     cap_add:
@@ -13,6 +13,8 @@ services:
       - /tank/git/homelab-config/caddy:/etc/caddy
       - /tank/services/caddy/data:/data
       - /tank/services/caddy/config:/config
+    environment:
+      - CLOUDFLARE_API_KEY=${CLOUDFLARE_API_KEY?}
 
   tsdproxy:
     image: almeidapaulopt/tsdproxy:1
